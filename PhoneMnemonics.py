@@ -14,4 +14,4 @@ def helper(phoneNumber, mnem, current):
 			for letter in dct[int(phoneNumber[0])]:
 				helper(phoneNumber[1:], mnem, current + letter)
 
-print(phoneNumberMnemonics('145'))
+print(phoneNumberMnemonics('145')) 
