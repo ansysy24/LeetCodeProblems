@@ -2,10 +2,9 @@ def invertBinaryTree(tree):
     if tree is None:
         return
 
-
-tree.right, tree.left = tree.left, tree.right
-invertBinaryTree(tree.right)
-invertBinaryTree(tree.left)
+    tree.right, tree.left = tree.left, tree.right
+    invertBinaryTree(tree.right)
+    invertBinaryTree(tree.left)
 
 
 # This is the class of the input binary tree.
