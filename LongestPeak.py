@@ -1,40 +1,21 @@
 def longestPeak(array):
-    if len(array) < 3:
-        return 0
-    j = 0
-    while array[0] >= array[1]:
-        array.pop(0)
+    peaks = []
+    for i in range(1, len(array)-1):
+        if array[i-1] < array[i] and array[i] > array[i+1]:
+            peaks.append(i)
+    mx = 0
+    for j in peaks:
+        left = 0
+        k = j
+        while k > 0 and array[k-1] < array[k]:
+            left += 1
+            k -= 1
+        right = 0
+        k = j
+        while k < len(array)-1 and array[k+1] < array[k]:
+            right += 1
+            k += 1
+        mx = max(mx, left+right+1)
+    return mx
 
-    max_ln = 0
-    ln = 1
-    up = True
-    peak = False
-
-    for i, num in enumerate(array[1:]):
-
-        if num == array[i]:
-            if peak:
-                max_ln = max(ln, max_ln)
-                peak = False
-            ln = 1
-
-        elif up == True:
-            if num < array[i]:
-                up = False
-                peak = True
-                max_ln = max(ln, max_ln)
-            ln += 1
-
-        else:
-            if num > array[i]:
-                up = True
-                if peak:
-                    max_ln = max(ln, max_ln)
-                peak = False
-                ln = 1
-                continue
-            ln += 1
-
-        print(ln)
-
-    return max(ln, max_ln)
+print(longestPeak([1, 2, 3, 3, 4, 0, 10, 6, 5, -1, -3, 2, 3]))
