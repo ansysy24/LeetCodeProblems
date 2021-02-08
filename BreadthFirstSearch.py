@@ -18,3 +18,12 @@ class Node:
                     next_level.append(ch)
             level = next_level
         return array
+
+    def breadthFirstSearch2(self, array):
+        queue = [self]
+        while queue:
+            current = queue.pop(0)
+            array.append(current.name)
+            for ch in current.children:
+                queue.append(ch)
+        return array
