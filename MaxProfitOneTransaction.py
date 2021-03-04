@@ -26,5 +26,6 @@ class Solution2:
 
         return profit
 
-print(Solution2.maxProfit([7,1,5,3,6,4]))
-print(Solution.maxProfit([7,1,5,3,6,4]))
+
+print(Solution2.maxProfit([7, 1, 5, 3, 6, 4]))
+print(Solution.maxProfit([7, 1, 5, 3, 6, 4]))
