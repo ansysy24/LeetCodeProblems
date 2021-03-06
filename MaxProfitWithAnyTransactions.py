@@ -36,7 +36,7 @@ class Solution:
         return profit
 
 
-class Solution:
+class Solution2:
     def maxProfit(self, prices: List[int]) -> int:
         if len(prices) < 2:
             return 0
