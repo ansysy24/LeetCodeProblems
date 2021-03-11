@@ -16,6 +16,9 @@ class LinkedList:
 
         k = k % leng
 
+        if k == 0:
+            return head_copy
+
         m = leng - k - 1
 
         head = head_copy
