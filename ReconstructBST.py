@@ -13,7 +13,6 @@ def reconstructBst(values):
     return head
 
 def insert_value_into_tree(head, value):
-    head_copy = head
     while True:
         if value >= head.value:
             if head.right is None:
