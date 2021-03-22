@@ -15,5 +15,4 @@ def apartmentHunting(blocks, reqs):
                 distance = max(distance, cur_dist)
 
         result = min(result, distance)
-
     return result
