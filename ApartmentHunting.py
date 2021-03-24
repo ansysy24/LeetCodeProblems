@@ -1,18 +1,21 @@
 def apartmentHunting(blocks, reqs):
-    result = len(blocks) - 1
+    min_dist = len(blocks) - 1
+    result = -1
 
     for i, block in enumerate(blocks):
-        distance = 0
-
-        for key in block:
-            cur_dist = len(blocks) - 1
-
+        cur_dist = 0
+        for key in reqs:
+            key_dist = len(blocks) - 1
             if not block[key]:
                 for j, block2 in enumerate(blocks):
                     if block2[key]:
-                        cur_dist = min(cur_dist, abs(i - j))
+                        key_dist = min(key_dist, abs(i - j))
+            else:
+                key_dist = 0
 
-                distance = max(distance, cur_dist)
+            cur_dist = max(cur_dist, key_dist)
 
-        result = min(result, distance)
+        if cur_dist < min_dist:
+            min_dist = cur_dist
+            result = i
     return result
