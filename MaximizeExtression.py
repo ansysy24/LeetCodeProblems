@@ -2,37 +2,27 @@ def maximizeExpression(array):
     if len(array) < 4:
         return 0
 
-    a = array[0]
-    b = array[1]
-    ab = [0]
-    i = 1
-    while i < len(array) - 2:
-        b = min(b, array[i])
-        ab.append(a - b)
-        a = max(a, array[i])
-        i += 1
-    ab += [0, 0]
-
-    mxs = []
-    mx = array[0]
+    max_as = []
+    max_a = array[0]
     for num in array:
-        mx = max(mx, num)
-        mxs.append(mx)
+        max_a = max(max_a, num)
+        max_as.append(max_a)
 
-    mx1 = ab[1]
-    for i in range(2, len(mxs) - 1):
-        mx1 = max(mx1, ab[i - 1] + mxs[i])
-        ab[i] = mx1
+    max_abs = [None, ]
+    max_ab = float('-inf')
+    for i in range(len(max_as) - 1):
+        max_ab = max(max_ab, max_as[i] - array[i + 1])
+        max_abs.append(max_ab)
 
-    mns = []
-    mn = array[-1]
-    for num in array:
-        mn = min(mn, num)
-        mns.append(mn)
+    max_abcs = [None, None]
+    max_abc = float('-inf')
+    for i in range(1, len(array) - 1):
+        max_abc = max(max_abc, max_abs[i] + array[i + 1])
+        max_abcs.append(max_abc)
 
-    mx2 = ab[2]
-    for i in range(3, len(mns)):
-        mx2 = max(mx2, ab[i - 1] + mns[i])
-
-
-    return mx2
+    max_abcds = [None, None, None]
+    max_abcd = float('-inf')
+    for i in range(2, len(array) - 1):
+        max_abcd = max(max_abcd, max_abcs[i] - array[i + 1])
+        max_abcds.append(max_abcd)
+    return max_abcds[-1]
