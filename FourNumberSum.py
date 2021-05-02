@@ -27,3 +27,26 @@ class Solution:
                             quads.add((nums[i], nums[j], nums[k], nums[l]))
 
         return quads
+
+
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        if len(nums) < 4:
+            return []
+
+        quads = set()
+        nums.sort()
+        diffs = {}
+        for i in range(len(nums) - 1):
+
+            for j in range(i + 1, len(nums)):
+                pair = nums[i] + nums[j]
+                diff = target - pair
+                if diff in diffs:
+                    for coup in diffs[diff]:
+                        quads.add(coup + (nums[i], nums[j]))
+
+            for k in range(i):
+                diffs[nums[k] + nums[i]] = diffs.get(nums[k] + nums[i], []) + [(nums[k], nums[i])]
+
+        return quads
