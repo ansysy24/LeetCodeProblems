@@ -42,3 +42,22 @@ class Solution:
                 result += matrix[i][j] if matrix[i][j] else ''
 
         return result
+
+# More elegant solution
+class Solution2:
+    def convert(self, s: str, numRows: int) -> str:
+        step = numRows * 2 - 2
+        if step <= 1:
+            return s
+
+        lst = [(1, 1, s[0])]
+        count = 1
+        for i in range(1, len(s)):
+            if i % step < numRows and i % step != 0:
+                count += 1
+            else:
+                count -= 1
+
+            lst.append((count, i, s[i]))
+
+        return ''.join([x[2] for x in sorted(lst)])
