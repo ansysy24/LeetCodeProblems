@@ -5,18 +5,21 @@ class Solution:
             self.steps.append((i, j, counter))
 
     def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:
+        if grid[0][0] == 1:
+            return -1
+
         i = 0
         j = 0
 
         self.steps = [(i, j, 0)]
         self.visited = set([(i, j)])
 
-        while self.steps[0][0] < len(grid) - 1 and self.steps[0][1] < len(grid[0]) - 1:
+        while self.steps and (self.steps[0][0] < len(grid) - 1 or self.steps[0][1] < len(grid[0]) - 1):
             step = self.steps.pop(0)
             k = step[0]
             l = step[1]
             counter = step[2]
-            if k < len(grid) - 1 and grid[k + 1][l - 1] == 0:
+            if k < len(grid) - 1 and grid[k + 1][l] == 0:
                 self.change_state(k + 1, l, counter + 1)
 
             if l < len(grid[0]) - 1 and grid[k][l + 1] == 0:
@@ -25,7 +28,7 @@ class Solution:
             if k < len(grid) - 1 and l < len(grid[0]) - 1 and grid[k + 1][l + 1] == 0:
                 self.change_state(k + 1, l + 1, counter + 1)
 
-            if k > 0 and grid[k - 1][step[l]] == 0:
+            if k > 0 and grid[k - 1][l] == 0:
                 self.change_state(k - 1, l, counter + 1)
 
             if l > 0 and grid[k][l - 1] == 0:
@@ -40,4 +43,4 @@ class Solution:
             if k < len(grid) - 1 and l > 0 and grid[k + 1][l - 1] == 0:
                 self.change_state(k + 1, l - 1, counter + 1)
 
-        return self.steps[0][2]
+        return self.steps[0][2] + 1 if self.steps else -1
