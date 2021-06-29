@@ -34,3 +34,17 @@ class Solution:
         self.values_list_left(root.left)
         self.values_list_right(root.right)
         return self.values_left == self.values_right
+
+
+class Solution2:
+    def isSymmetric(self, root: TreeNode) -> bool:
+        if not root.left or not root.right:
+            return root.right == root.left
+
+        return self.mirror(root.left, root.right)
+
+    def mirror(self, root1, root2):
+        if not root1 or not root2:
+            return root1 == root2
+
+        return self.mirror(root1.left, root2.right) and self.mirror(root1.right, root2.left) and root1.val == root2.val
